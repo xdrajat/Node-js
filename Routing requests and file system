@@ -1,0 +1,22 @@
+const http = require('http');
+const fs = require('fs');
+
+const server = http.createServer((req,res)=>{
+
+    const url=req.url;
+    if(url==='/'){
+        res.write('<html><body><form action="/new" method="POST"><input type="text"></input><button type="sumbit">Send</button></form></body></html>');
+        return res.end();
+    }
+    if(url==="/new"){
+        res.write('This is a new page');
+        return res.end();
+    }
+
+    res.write("Done");
+    fs.writeFileSync('NewFile.txt','This is a new file');
+    res.end();
+ 
+});
+
+server.listen(3000);
